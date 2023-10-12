@@ -1,0 +1,11 @@
+Dockerfile
+dokcer-compose.yml
+.dockerignore
+node_modules
+npm-debug.log
+*.md
+.next
+.git
+.gitignore
+.prettierrc
+.eslintrc.json
