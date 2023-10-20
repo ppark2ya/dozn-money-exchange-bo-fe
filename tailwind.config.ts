@@ -1,68 +1,66 @@
-import forms from '@tailwindcss/forms';
-import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
+  darkMode: ['class'],
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      fontFamily: {
+        sans: ['var(--font-sans)', ...fontFamily.sans],
       },
       colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
         primary: {
-          100: '#3246FF',
-          200: '#7582FF',
-          300: '#2635BF',
-          400: '#CDCFE3',
-          500: '#002968',
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
-          100: '#EDEDED',
-          200: '#E8EBED',
-          300: '#C7C7C7',
-          400: '#F7F8F9',
-          500: '#5867F8',
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
         },
-        danger: {
-          100: '#FF767E',
-          200: '#FF4853',
-          300: '#DA2731',
-          400: '#E5B8BA',
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
         },
-        success: {
-          100: '#31DCA9',
-          200: '#2EC99A',
-          300: '#00B8A2',
-          400: '#BBCFC4',
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
         },
-        grey: {
-          100: '#F7F8F9',
-          200: '#EDEDED',
-          300: '#E8EBED',
-          400: '#C7C7C7',
-          500: '#9EA4AA',
-          600: '#72787F',
-          700: '#1B1D1F',
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
         },
-        yellow: {
-          100: '#FFF6A0',
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
         },
       },
-      backgroundColor: {
-        article: '#F3F3F3',
-        tooltip: '#3e3434',
-        tertiary: '#FDFDFF',
-      },
-      borderColor: {
-        tooltip: '#3e3434',
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
       borderWidth: {
         1: '1px',
@@ -165,114 +163,26 @@ const config: Config = {
       lineHeight: {
         4.5: '1.125rem', // 18px
       },
-      borderRadius: {
-        '2lg': '0.625rem',
-        '4xl': '1.875rem',
-      },
-      transitionProperty: {
-        width: 'width',
-        'grid-template-columns': 'grid-template-columns',
-        height: 'height',
-        'max-height': 'max-height',
-      },
-      gridTemplateRows: {
-        layout: '44px auto',
-      },
-      gridTemplateColumns: {
-        header: 'auto 200px',
-        'max-4': 'repeat(4, minmax(auto, 25%))', // grid 요소가 row당 최대 4개
-        'max-4-gap-1': 'repeat(4, minmax(auto, calc(25% - 1rem)))', // grid 요소가 row당 최대 4개이면서 간격이 1rem
-        category: 'repeat(4, 130px)',
-        'base-information': 'repeat(8, 130px)',
-        'select-input': '130px 328px',
-      },
       keyframes: {
-        ripple: {
-          from: { opacity: '1', transform: 'scale(0)' },
-          to: { opacity: '0', transform: 'scale(5)' },
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
-        fadein: {
-          from: {
-            opacity: '0',
-          },
-          to: {
-            opacity: '1',
-          },
-        },
-        fadeout: {
-          from: { opacity: '1' },
-          to: { opacity: '0' },
-        },
-        slideIn_y: {
-          from: {
-            transform: 'translateY(15%)',
-          },
-          to: {
-            transform: 'translateY(0)',
-          },
-        },
-        slideOut_y: {
-          from: {
-            transform: 'translateY(0)',
-          },
-          to: {
-            transform: 'translateY(15%)',
-          },
-        },
-        slideIn_x: {
-          from: {
-            transform: 'translateX(100%)',
-          },
-          to: {
-            transform: 'translateX(0%)',
-          },
-        },
-        slideOut_x: {
-          from: {
-            transform: 'translateX(0%)',
-          },
-          to: {
-            transform: 'translateX(100%)',
-          },
-        },
-        profile_menu_slideIn: {
-          from: {
-            transform: 'translateY(-20%)',
-            opacity: '0',
-          },
-          to: {
-            transform: 'translateY(0)',
-            opacity: '1',
-          },
-        },
-        profile_menu_slideOut: {
-          from: {
-            transform: 'translateY(0)',
-            opacity: '1',
-          },
-          to: {
-            transform: 'translateY(-20%)',
-            opacity: '0',
-          },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
-        ripple: 'ripple 1s',
-        fadein: 'fadein 0.25s ease-out',
-        fadeout: 'fadeout 0.35s ease-out',
-        slideIn_y: 'slideIn_y 0.25s ease-out',
-        slideOut_y: 'slideOut_y 0.35s ease-out',
-        slideIn_x: 'slideIn_x 0.25s ease-out',
-        slideOut_x: 'slideOut_x 0.35s ease-out',
-        profileMenuSlideIn: 'profile_menu_slideIn 0.2s ease',
-        profileMenuSlideOut: 'profile_menu_slideOut 0.2s ease',
-        spinOnce: 'spin 0.4s linear',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },
   plugins: [
-    forms,
-    typography,
+    require('tailwindcss-animate'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
     plugin(({ addComponents }) => {
       addComponents({
         '.flex-center': {
@@ -290,4 +200,5 @@ const config: Config = {
     }),
   ],
 };
+
 export default config;
