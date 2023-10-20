@@ -1,0 +1,23 @@
+# `useMediaQuery`
+
+Easily retrieve media dimensions with this Hook React which also works onResize.
+
+Note:
+
+Before Safari 14, MediaQueryList is based on EventTarget and only supports addListener/removeListener for media queries. If you don't support these versions you may remove these checks. Read more about this on MDN.
+
+## Usage
+
+```jsx
+import { useMediaQuery } from '@chainexpressbill/hooks';
+
+export default function Component() {
+  const matches = useMediaQuery('(min-width: 768px)');
+
+  return (
+    <div>
+      {`The view port is ${matches ? 'at least' : 'less than'} 768 pixels wide`}
+    </div>
+  );
+}
+```

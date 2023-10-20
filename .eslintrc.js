@@ -57,6 +57,8 @@ const config = {
       'error',
       require('os').EOL === '\r\n' ? 'windows' : 'unix',
     ],
+    '@typescript-eslint/no-explicit-any': 1,
+    '@typescript-eslint/no-unsafe-enum-comparison': 0,
   },
   globals: {
     React: 'writable',

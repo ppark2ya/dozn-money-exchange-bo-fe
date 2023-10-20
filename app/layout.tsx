@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import { Theme } from '@radix-ui/themes';
 
 import './globals.css';
@@ -6,6 +6,10 @@ import '@radix-ui/themes/styles.css';
 
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
+import { authOptions } from '@/libs/auth/auth-options';
+import NextAuthProvider from '@/libs/providers/next-auth-provider';
+import { ReactQueryProvider } from '@/libs/providers/react-query-provider';
+import { getServerSession } from 'next-auth';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,7 +25,9 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -31,7 +37,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontSans.variable,
         )}
       >
-        <Theme>{children}</Theme>
+        <NextAuthProvider>
+          <ReactQueryProvider session={session}>
+            <Theme>{children}</Theme>
+          </ReactQueryProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );
