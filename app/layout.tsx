@@ -1,6 +1,8 @@
 import { cn } from '@/lib/utils';
+import { Theme } from '@radix-ui/themes';
 
 import './globals.css';
+import '@radix-ui/themes/styles.css';
 
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
@@ -29,7 +31,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontSans.variable,
         )}
       >
-        {children}
+        <Theme>{children}</Theme>
       </body>
     </html>
   );
